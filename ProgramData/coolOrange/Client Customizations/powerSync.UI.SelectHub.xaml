@@ -1,0 +1,135 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="powerSync: Select Account" 
+    Height="160" MinHeight="160" Width="400" MinWidth="450" FontFamily="Segoe UI" FontSize="12.5"
+    Icon="pack://application:,,,/powerAPS;component/Images/coolorange.ico"
+    WindowStartupLocation="CenterOwner">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Height" Value="24" />
+            </Style>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                <Setter Property="Height" Value="29" />
+            </Style>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="11.5" />
+                <Setter Property="VerticalAlignment" Value="Bottom" />
+                <Setter Property="Padding" Value="0,0,0,2" />
+            </Style>
+            <!-- Fusion Logo -->
+            <Geometry x:Key="Fg1">F1 M965.0002,1024z M0,0z M156,0.15L886,160 965.0002,160 965.0002,1024 137.0002,1024C108.2814,1024,85.0002,1000.7188,85.0002,972L85.0002,754.2921 154.4662,2.4109 156,0.15z</Geometry>
+            <Geometry x:Key="Fg2">F1 M965.0002,1024z M0,0z M156,0L842.0002,0C870.6998,0,894.0002,23.3004,894.0002,52L894.0002,720 156,720 156,0 156,0z</Geometry>
+            <Geometry x:Key="Fg3">F1 M965.0002,1024z M0,0z M0,814L0,814 156,720 156,0 0,94 0,814z</Geometry>
+            <Geometry x:Key="Fg4">F1 M965.0002,1024z M0,0z M376.3618,818.1406L376.3618,854.2129 426.0425,854.2129 426.0425,880.9981 376.3618,880.9981 376.3618,942.127 338.561,942.127 338.561,790.9249 435.1147,790.9249 435.1147,818.1407 376.3618,818.1407z</Geometry>
+            <Geometry x:Key="Fg5">F1 M965.0002,1024z M0,0z M577.0039,790.9248L577.0039,942.1269 543.9551,942.1269 542.0108,931.3271C533.3712,939.1025 521.0587,945.583 503.3467,945.583 471.8091,945.583 453.8814,923.335 453.8814,893.0937L453.8814,790.9248 491.6827,790.9248 491.6827,894.8223C491.6827,909.7266 498.1622,918.583 513.9307,918.583 525.1631,918.583 533.1553,914.2627 539.2032,907.5664L539.2032,790.9248 577.004,790.9248z</Geometry>
+            <Geometry x:Key="Fg6">F1 M965.0002,1024z M0,0z M598.9033,894.8223L634.5439,894.8223C635.4072,906.918 639.2959,918.1504 661.7597,918.1504 678.6083,918.1504 683.7919,910.5908 683.7919,903.4619L683.7919,898.9258C683.7919,888.126,677.9599,885.5342,657.4394,879.0537L636.4873,872.1416C613.8076,865.0137,603.8711,852.918,603.8711,834.125L603.8711,828.7246C603.8711,808.8535 620.2871,787.4687 661.9756,787.4687 695.8887,787.4687 719.2168,802.8046 720.5127,833.9091L685.7363,833.9091C684.6562,822.245 678.3925,813.1728 662.1924,813.1728 645.7754,813.1728 641.4561,820.0849 641.4561,826.7812L641.4561,829.8046C641.4561,836.9335,646.4239,841.2538,664.3516,846.8691L684.8721,853.5654C709.9287,861.5576,721.5928,873.4375,721.5928,894.8222L721.5928,901.3027C721.5928,926.1425 699.9922,945.583 661.7598,945.583 623.7432,945.583 600.8467,927.8711 598.9034,894.8223z</Geometry>
+            <Geometry x:Key="Fg7">F1 M965.0002,1024z M0,0z M517.0254,232.9429L517.0254,328.1338 648.1279,328.1338 648.1279,398.815 517.0254,398.815 517.0254,560.127 417.2744,560.127 417.2744,161.1221 672.0674,161.1221 672.0674,232.9429 517.0254,232.9429z</Geometry>
+            <DrawingGroup x:Key="Fdg" ClipGeometry="M0,0 V1024 H965.0002 V0 H0 Z">
+                <DrawingGroup Opacity="1">
+                    <GeometryDrawing Brush="#FF933C00" Geometry="{StaticResource Fg1}" />
+                    <GeometryDrawing Brush="#FFFF6B00" Geometry="{StaticResource Fg2}" />
+                    <GeometryDrawing Brush="#FFFF9548" Geometry="{StaticResource Fg3}" />
+                </DrawingGroup>
+                <DrawingGroup Opacity="1">
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="{StaticResource Fg4}" />
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="{StaticResource Fg5}" />
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="{StaticResource Fg6}" />
+                </DrawingGroup>
+                <DrawingGroup Opacity="1">
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="{StaticResource Fg7}" />
+                </DrawingGroup>
+            </DrawingGroup>
+            <DrawingImage x:Key="FusionLogo" Drawing="{StaticResource Fdg}" />
+
+            <!-- Docs Logo -->
+            <Geometry x:Key="Ag1">F1 M965.0002,1024z M0,0z M185,0.15L915,160 994,160 994,1024 166,1024A52,52,0,0,1,114,972L114,754.2921 183.4662,2.4109z</Geometry>
+            <Geometry x:Key="Ag2">F1 M965.0002,1024z M0,0z M156,0L842,0A52,52,0,0,1,894,52L894,720A0,0,0,0,1,894,720L156,720A0,0,0,0,1,156,720L156,0A0,0,0,0,1,156,0z</Geometry>
+            <Geometry x:Key="Ag3">F1 M965.0002,1024z M0,0z M0,814L0,814 156,720 156,0 0,94 0,814z</Geometry>
+            <Geometry x:Key="Ag4">F1 M965.0002,1024z M0,0z M471.9771,851.19L471.9771,879.0542C471.9771,917.9351,448.2163,942.1275,403.2871,942.1275L353.8228,942.1275 353.8228,790.9248 408.4722,790.9248C450.8081,790.9248,471.9771,815.1172,471.9771,851.19z M434.1763,849.8941C434.1763,828.7251,425.5356,818.1411,407.3921,818.1411L391.6235,818.1411 391.6235,914.9111 404.1519,914.9111C424.2397,914.9111,434.1763,904.1111,434.1763,880.1347z</Geometry>
+            <Geometry x:Key="Ag5">F1 M965.0002,1024z M0,0z M623.7822,849.2461L623.7822,884.0215C623.7822,920.5264 601.3174,945.583 558.333,945.583 516.2119,945.583 493.0991,920.5264 493.0991,884.0215L493.0991,849.2461C493.0991,812.5254 515.9961,787.4688 558.333,787.4688 601.3174,787.4688 623.7822,812.5254 623.7822,849.2461z M530.9,849.0293L530.9,883.8066C530.9,906.7021 540.1881,918.583 558.3326,918.583 576.4771,918.583 585.7652,906.7021 585.7652,883.8066L585.7652,849.0293C585.7652,826.3493 576.4771,814.4688 558.3326,814.4688 540.1881,814.4688 530.9,826.35 530.9,849.0293z</Geometry>
+            <Geometry x:Key="Ag6">F1 M965.0002,1024z M0,0z M645.3135,887.4785L645.3135,845.5732C645.3135,811.0127 667.1299,787.4688 706.875,787.4688 741.6514,787.4688 763.4678,803.8848 764.5479,835.6367L729.7705,835.6367C728.9072,822.4609 721.7783,814.6855 707.3066,814.6855 692.1866,814.6855 683.5459,824.6211 683.5459,840.8213L683.5459,892.2305C683.5459,908.4305 691.9707,918.3662 707.0908,918.3662 722.6426,918.3662 729.3389,910.374 729.9873,895.9023L765.1953,895.9023C763.0353,929.8145 742.2988,945.583 706.0107,945.583 668.4258,945.583 645.3135,922.0391 645.3135,887.4785z</Geometry>
+            <Geometry x:Key="Ag7">F1 M965.0002,1024z M0,0z M719.0205,320.1538L719.0205,393.6846C719.0205,496.2861,656.3205,560.127,537.7588,560.127L407.2266,560.127 407.2266,161.1221 551.4385,161.1221C663.16,161.1221,719.0205,224.9629,719.0205,320.1538z M619.2695,316.7338C619.2695,260.8729,596.4688,232.9428,548.5889,232.9428L506.9775,232.9428 506.9775,488.3062 540.0381,488.3062C593.0488,488.3062,619.2695,459.8062,619.2695,396.5347z</Geometry>
+            <DrawingGroup x:Key="Adg" ClipGeometry="M0,0 V1024 H965.0002 V0 H0 Z">
+                <DrawingGroup Opacity="1">
+                    <DrawingGroup Transform="1,0,0,1,-29,0">
+                        <GeometryDrawing Brush="#FF0C3D91" Geometry="{StaticResource Ag1}" />
+                    </DrawingGroup>
+                    <GeometryDrawing Brush="#FF186BFF" Geometry="{StaticResource Ag2}" />
+                    <GeometryDrawing Brush="#FF679AE7" Geometry="{StaticResource Ag3}" />
+                </DrawingGroup>
+                <DrawingGroup Opacity="1">
+                    <DrawingGroup Transform="1,0,0,1,-29,0">
+                        <GeometryDrawing Brush="#FFFFFFFF" Geometry="{StaticResource Ag4}" />
+                    </DrawingGroup>
+                    <DrawingGroup Transform="1,0,0,1,-29,0">
+                        <GeometryDrawing Brush="#FFFFFFFF" Geometry="{StaticResource Ag5}" />
+                    </DrawingGroup>
+                    <DrawingGroup Transform="1,0,0,1,-29,0">
+                        <GeometryDrawing Brush="#FFFFFFFF" Geometry="{StaticResource Ag6}" />
+                    </DrawingGroup>
+                </DrawingGroup>
+                <DrawingGroup Opacity="1" Transform="1,0,0,1,-29,0">
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="{StaticResource Ag7}" />
+                </DrawingGroup>
+            </DrawingGroup>
+            <DrawingImage x:Key="DocsLogo" Drawing="{StaticResource Adg}" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" x:Name="Label" Content="Select Autodesk Account:" />
+        <ComboBox TextSearch.TextPath="Hub.attributes.name" x:Name="Hub" Grid.Row="1" VerticalAlignment="Top" SelectedValuePath="Hub" Height="23" IsEditable="False">
+            <ComboBox.ItemTemplate>
+                <ItemContainerTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="17" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Type}" Value="Fusion">
+                                            <Setter Property="Source" Value="{StaticResource FusionLogo}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Type}" Value="ACC">
+                                            <Setter Property="Source" Value="{StaticResource DocsLogo}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <TextBlock ><Run Text="{Binding Path=Hub.attributes.name}"/></TextBlock>
+                    </StackPanel>
+                </ItemContainerTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Ok" Grid.Column="1" Height="26" Width="100" Margin="0,0,10,0">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedValue, ElementName=Hub}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                OK
+            </Button>
+            <Button x:Name="Cancel" Grid.Column="2" Height="26" Width="100" IsCancel="True">Cancel</Button>
+        </Grid>
+    </Grid>
+</Window>
