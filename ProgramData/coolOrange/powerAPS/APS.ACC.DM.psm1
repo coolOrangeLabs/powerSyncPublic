@@ -53,7 +53,7 @@ function Update-ApsAccCustomAttributes($project, $version, [HashTable]$propertie
         }
         $values += $value
     }
-    $body = @($values) | ConvertTo-Json -Compress
+    $body = ConvertTo-Json @($values) -Compress
     $parameters = @{
         "Uri" = "https://developer.api.autodesk.com/bim360/docs/v1/projects/$($project.id.TrimStart("b."))/versions/$([System.Web.HttpUtility]::UrlEncode($version.id))/custom-attributes:batch-update"
         "Method" = "Post"
