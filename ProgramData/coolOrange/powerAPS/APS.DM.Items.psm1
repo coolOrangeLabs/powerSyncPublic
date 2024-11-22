@@ -10,6 +10,20 @@
 
 # Function to get the latest version (tip version) from an item. Returns a version object.
 # API documentation: https://aps.autodesk.com/en/docs/data/v2/reference/http/projects-project_id-items-item_id-tip-GET
+function Get-ApsItemById($project, $id) {
+    Write-Host "Reading Item..."
+
+    $parameters = @{
+        "Uri"     = "https://developer.api.autodesk.com/data/v1/projects/$($project.id)/items/$([System.Web.HttpUtility]::UrlEncode($id))"
+        "Method"  = "Get"
+        "Headers" = $ApsConnection.RequestHeaders
+    }
+    $response = Invoke-RestMethod @parameters
+    return $response.data
+}
+
+# Function to get the latest version (tip version) from an item. Returns a version object.
+# API documentation: https://aps.autodesk.com/en/docs/data/v2/reference/http/projects-project_id-items-item_id-tip-GET
 function Get-ApsTipVersion($project, $item) {
     Write-Host "Reading Tip Version..."
 
