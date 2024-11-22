@@ -24,7 +24,7 @@ function ApsTokenIsValid() {
         return $true
     }
 
-    $missingRoles = GetMissingRoles @("Vault Get Options", "Vault Set Options")
+    $missingRoles = GetMissingRoles @(77, 76)
     if ($missingRoles) {
         [System.Windows.MessageBox]::Show(
             "The current user does not have the required permissions: $missingRoles!", 

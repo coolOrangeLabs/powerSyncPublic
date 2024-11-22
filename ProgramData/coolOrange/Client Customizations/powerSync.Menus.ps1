@@ -16,7 +16,7 @@ if ($processName -notin @('Connectivity.VaultPro')) {
 
 #region Tools Menu
 Add-VaultMenuItem -Location ToolsMenu -Name "powerSync: APS Authentication Settings..." -Action {
-    $missingRoles = GetMissingRoles @("Vault Get Options", "Vault Set Options")
+    $missingRoles = GetMissingRoles @(77, 76)
     if ($missingRoles) {
         [System.Windows.MessageBox]::Show(
             "The current user does not have the required permissions: $missingRoles!", 
@@ -65,7 +65,7 @@ Add-VaultMenuItem -Location ToolsMenu -Name "powerSync: APS Authentication Setti
 # }
 
 Add-VaultMenuItem -Location ToolsMenu -Name "powerSync: ACC Default Account..." -Action {
-    $missingRoles = GetMissingRoles @("Vault Get Options", "Vault Set Options")
+    $missingRoles = GetMissingRoles @(77, 76)
     if ($missingRoles) {
         [System.Windows.MessageBox]::Show(
             "The current user does not have the required permissions: $missingRoles!", 
@@ -89,7 +89,7 @@ Add-VaultMenuItem -Location ToolsMenu -Name "powerSync: ACC Default Account..." 
 }
 
 Add-VaultMenuItem -Location ToolsMenu -Name "powerSync: Vault Folder Behaviors..." -Action {
-    $missingRoles = GetMissingRoles @("Vault Get Options", "Vault Set Options")
+    $missingRoles = GetMissingRoles @(77, 76)
     if ($missingRoles) {
         [System.Windows.MessageBox]::Show(
             "The current user does not have the required permissions: $missingRoles!", 
@@ -126,7 +126,7 @@ Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Assign ACC Proje
         return
     }
 
-    $missingRoles = GetMissingRoles @("Vault Get Options", "Folder Edit User Defined Property", "Folder Change Category")
+    $missingRoles = GetMissingRoles @(77, 216, 217, 218)
     if ($missingRoles) {
         [System.Windows.MessageBox]::Show(
             "The current user does not have the required permissions: $missingRoles!", 
@@ -198,7 +198,7 @@ Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Edit Attribute M
         return
     }
 
-    $missingRoles = GetMissingRoles @("Vault Get Options", "Object Get Attributes", "Object Set Attributes")
+    $missingRoles = GetMissingRoles @(77, 253, 254)
     if ($missingRoles) {
         [System.Windows.MessageBox]::Show(
             "The current user does not have the required permissions: $missingRoles!", 
@@ -232,7 +232,7 @@ Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Go To ACC Docs P
         return
     }
 
-    $missingRoles = GetMissingRoles @("Vault Get Options")
+    $missingRoles = GetMissingRoles @(77)
     if ($missingRoles) {
         [System.Windows.MessageBox]::Show(
             "The current user does not have the required permissions: $missingRoles!", 
@@ -294,7 +294,7 @@ Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Download File fr
         return
     }
 
-    $missingRoles = GetMissingRoles @("Vault Get Options", "File Create")
+    $missingRoles = GetMissingRoles @(77, 4)
     if ($missingRoles) {
         [System.Windows.MessageBox]::Show(
             "The current user does not have the required permissions: $missingRoles!", 
@@ -345,7 +345,7 @@ Add-VaultMenuItem -Location FileContextMenu -Name "powerSync: Publish Drawings a
         return
     }
 
-    $missingRoles = GetMissingRoles @("Job Queue Add")
+    $missingRoles = GetMissingRoles @(119)
     if ($missingRoles) {
         [System.Windows.MessageBox]::Show(
             "The current user does not have the required permissions: $missingRoles!", 
@@ -399,7 +399,7 @@ Add-VaultMenuItem -Location FileContextMenu -Name "powerSync: Publish Models as 
         return
     }
 
-    $missingRoles = GetMissingRoles @("Job Queue Add")
+    $missingRoles = GetMissingRoles @(119)
     if ($missingRoles) {
         [System.Windows.MessageBox]::Show(
             "The current user does not have the required permissions: $missingRoles!", 
@@ -453,7 +453,7 @@ Add-VaultMenuItem -Location FileContextMenu -Name "powerSync: Publish Inventor A
         return
     }
 
-    $missingRoles = GetMissingRoles @("Job Queue Add")
+    $missingRoles = GetMissingRoles @(119)
     if ($missingRoles) {
         [System.Windows.MessageBox]::Show(
             "The current user does not have the required permissions: $missingRoles!", 
@@ -507,7 +507,7 @@ Add-VaultMenuItem -Location FileContextMenu -Name "powerSync: Publish Native Fil
         return
     }
 
-    $missingRoles = GetMissingRoles @("Job Queue Add")
+    $missingRoles = GetMissingRoles @(119)
     if ($missingRoles) {
         [System.Windows.MessageBox]::Show(
             "The current user does not have the required permissions: $missingRoles!", 
@@ -551,7 +551,7 @@ Add-VaultMenuItem -Location FileContextMenu -Name "powerSync: Publish Models for
         return
     }
 
-    $missingRoles = GetMissingRoles @("Job Queue Add")
+    $missingRoles = GetMissingRoles @(119)
     if ($missingRoles) {
         [System.Windows.MessageBox]::Show(
             "The current user does not have the required permissions: $missingRoles!", 
