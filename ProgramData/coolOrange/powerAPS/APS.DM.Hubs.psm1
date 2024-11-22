@@ -25,7 +25,7 @@ function Get-ApsHubs {
 # Function to get a single hub. Returns a hub object with the given name or $null.
 function Get-ApsHub($hubName) {
     $hubs = Get-ApsHubs
-    $hub = $hubs | Where-Object { $_.attributes.name -eq $hubName }
+    $hub = $hubs | Where-Object { $_.attributes.name -eq $hubName } | Select-Object -First 1
     if ($hub) {
         return $hub
     } else {

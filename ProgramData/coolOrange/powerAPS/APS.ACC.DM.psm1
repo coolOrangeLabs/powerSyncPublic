@@ -22,7 +22,7 @@ function Get-ApsAccCustomAttributeDefinitions($project, $folder) {
     return $response.results
 }
 
-# Function to get all custom attributes of a given version. Returns an array of custom attribute objects.
+# Function to get all custom attributes of a given version. Returns an array with one version object with an array property 'customAttributes'.
 # API documentation: https://aps.autodesk.com/en/docs/acc/v1/reference/http/document-management-versionsbatch-get-POST/
 function Get-ApsAccCustomAttributes($project, $version) {
     Write-Host "Reading Custom Attributes..."

@@ -25,7 +25,7 @@ function Get-ApsProjects($hub) {
 # Function to get a single project. Returns a project object with the given name or $null.
 function Get-ApsProject($hub, $projectName) {
     $projects = Get-ApsProjects $hub
-    $project = $projects | Where-Object { $_.attributes.name -eq $projectName }
+    $project = $projects | Where-Object { $_.attributes.name -eq $projectName } | Select-Object -First 1
     if ($project) {
         return $project
     } else {

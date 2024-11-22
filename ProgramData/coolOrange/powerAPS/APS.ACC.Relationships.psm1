@@ -72,9 +72,9 @@ function Add-ApsAccRelationship($project, $version1, $version2) {
     $parameters = @{
         "Uri"         = "https://developer.api.autodesk.com/bim360/relationship/v2/containers/$($project.id.TrimStart("b."))/relationships"
         "Method"      = "Put"
+        "Headers"     = $ApsConnection.RequestHeaders        
         "ContentType" = "application/json"
         "Body"        = $body
-        "Headers"     = $ApsConnection.RequestHeaders
     }
     $response = Invoke-RestMethod @parameters
     return $response
@@ -93,9 +93,9 @@ function Remove-ApsAccRelationships($project, [array]$relationshipIds) {
     $parameters = @{
         "Uri"         = "https://developer.api.autodesk.com/bim360/relationship/v2/containers/$($project.id.TrimStart("b."))/relationships:delete"
         "Method"      = "Post"
+        "Headers"     = $ApsConnection.RequestHeaders
         "ContentType" = "application/json"
         "Body"        = $body        
-        "Headers"     = $ApsConnection.RequestHeaders
     }    
     $response = Invoke-RestMethod @parameters
     return $response

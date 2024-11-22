@@ -57,9 +57,9 @@ function Add-ApsAccIssueComments($project, $issue, $commentText) {
     $parameters = @{
         "Uri" = "https://developer.api.autodesk.com/construction/issues/v1/projects/$($project.id.TrimStart("b."))/issues/$($issue.id)/comments"
         "Method" = "Post"
+        "Headers" = $ApsConnection.RequestHeaders
         "ContentType" = "application/json"
         "Body" = $body
-        "Headers" = $ApsConnection.RequestHeaders
     }
     $response = Invoke-RestMethod @parameters
     return $response
