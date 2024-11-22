@@ -16,6 +16,16 @@ if ($processName -notin @('Connectivity.VaultPro')) {
 
 #region Tools Menu
 Add-VaultMenuItem -Location ToolsMenu -Name "powerSync: APS Authentication Settings..." -Action {
+    $missingRoles = GetMissingRoles @("Vault Get Options", "Vault Set Options")
+    if ($missingRoles) {
+        [System.Windows.MessageBox]::Show(
+            "The current user does not have the required permissions: $missingRoles!", 
+            "powerSync: Permission error", 
+            "OK", 
+            "Error")
+        return
+    }
+
     $settings = GetVaultApsAuthenticationSettings $true
     if ($settings -is [powerAPS.Error]) {
         $settings = @{}
@@ -55,6 +65,16 @@ Add-VaultMenuItem -Location ToolsMenu -Name "powerSync: APS Authentication Setti
 # }
 
 Add-VaultMenuItem -Location ToolsMenu -Name "powerSync: ACC Default Account..." -Action {
+    $missingRoles = GetMissingRoles @("Vault Get Options", "Vault Set Options")
+    if ($missingRoles) {
+        [System.Windows.MessageBox]::Show(
+            "The current user does not have the required permissions: $missingRoles!", 
+            "powerSync: Permission error", 
+            "OK", 
+            "Error")
+        return
+    }
+
     if (-not (ApsTokenIsValid)) {
         return
     }
@@ -69,6 +89,16 @@ Add-VaultMenuItem -Location ToolsMenu -Name "powerSync: ACC Default Account..." 
 }
 
 Add-VaultMenuItem -Location ToolsMenu -Name "powerSync: Vault Folder Behaviors..." -Action {
+    $missingRoles = GetMissingRoles @("Vault Get Options", "Vault Set Options")
+    if ($missingRoles) {
+        [System.Windows.MessageBox]::Show(
+            "The current user does not have the required permissions: $missingRoles!", 
+            "powerSync: Permission error", 
+            "OK", 
+            "Error")
+        return
+    }
+
     if (-not (ApsTokenIsValid)) {
         return
     }
@@ -93,6 +123,16 @@ Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Assign ACC Proje
     param($entities)
     $folder = $entities[0]
     if (-not (ApsTokenIsValid)) {
+        return
+    }
+
+    $missingRoles = GetMissingRoles @("Vault Get Options", "Folder Edit User Defined Property", "Folder Change Category")
+    if ($missingRoles) {
+        [System.Windows.MessageBox]::Show(
+            "The current user does not have the required permissions: $missingRoles!", 
+            "powerSync: Permission error", 
+            "OK", 
+            "Error")
         return
     }
 
@@ -158,6 +198,16 @@ Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Edit Attribute M
         return
     }
 
+    $missingRoles = GetMissingRoles @("Vault Get Options", "Object Get Attributes", "Object Set Attributes")
+    if ($missingRoles) {
+        [System.Windows.MessageBox]::Show(
+            "The current user does not have the required permissions: $missingRoles!", 
+            "powerSync: Permission error", 
+            "OK", 
+            "Error")
+        return
+    }
+
     $mapping = GetVaultAccAttributeMapping $folder._FullPath
     if ($mapping -is [powerAPS.Error]) { 
         $mapping.ShowErrorMessage()
@@ -179,6 +229,16 @@ Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Go To ACC Docs P
     param($entities)
     $folder = $entities[0]
     if (-not (ApsTokenIsValid)) {
+        return
+    }
+
+    $missingRoles = GetMissingRoles @("Vault Get Options")
+    if ($missingRoles) {
+        [System.Windows.MessageBox]::Show(
+            "The current user does not have the required permissions: $missingRoles!", 
+            "powerSync: Permission error", 
+            "OK", 
+            "Error")
         return
     }
 
@@ -234,6 +294,16 @@ Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Download File fr
         return
     }
 
+    $missingRoles = GetMissingRoles @("Vault Get Options", "File Create")
+    if ($missingRoles) {
+        [System.Windows.MessageBox]::Show(
+            "The current user does not have the required permissions: $missingRoles!", 
+            "powerSync: Permission error", 
+            "OK", 
+            "Error")
+        return
+    }
+
     $hubName = GetVaultAccDefaultAccount
     $result = Get-DialogApsHubAndProject $null $hubName
     $hub = $result.Hub
@@ -272,6 +342,16 @@ Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Download File fr
 Add-VaultMenuItem -Location FileContextMenu -Name "powerSync: Publish Drawings as PDF to ACC" -Action {
     param($entities)
     if (-not (ApsTokenIsValid)) {
+        return
+    }
+
+    $missingRoles = GetMissingRoles @("Job Queue Add")
+    if ($missingRoles) {
+        [System.Windows.MessageBox]::Show(
+            "The current user does not have the required permissions: $missingRoles!", 
+            "powerSync: Permission error", 
+            "OK", 
+            "Error")
         return
     }
 
@@ -319,6 +399,16 @@ Add-VaultMenuItem -Location FileContextMenu -Name "powerSync: Publish Models as 
         return
     }
 
+    $missingRoles = GetMissingRoles @("Job Queue Add")
+    if ($missingRoles) {
+        [System.Windows.MessageBox]::Show(
+            "The current user does not have the required permissions: $missingRoles!", 
+            "powerSync: Permission error", 
+            "OK", 
+            "Error")
+        return
+    }
+
     $user = Get-ApsUserInfo
     if (-not $user) {
         [System.Windows.MessageBox]::Show(
@@ -357,9 +447,73 @@ Add-VaultMenuItem -Location FileContextMenu -Name "powerSync: Publish Models as 
     }    
 }
 
+Add-VaultMenuItem -Location FileContextMenu -Name "powerSync: Publish Inventor Assemblies as RVT to ACC" -Action {
+    param($entities)
+    if (-not (ApsTokenIsValid)) {
+        return
+    }
+
+    $missingRoles = GetMissingRoles @("Job Queue Add")
+    if ($missingRoles) {
+        [System.Windows.MessageBox]::Show(
+            "The current user does not have the required permissions: $missingRoles!", 
+            "powerSync: Permission error", 
+            "OK", 
+            "Error")
+        return
+    }
+
+    $user = Get-ApsUserInfo
+    if (-not $user) {
+        [System.Windows.MessageBox]::Show(
+            "Autodesk User Account Information cannot be determined!", 
+            "powerSync: Autodesk Account Error", 
+            "OK", 
+            "Error")
+        return
+    }
+
+    $excluded = @()
+    $files = @()
+    foreach($file in $entities){
+        if ( @("iam") -notcontains $file._Extension ) {
+            $excluded += $file._Name
+            continue
+        }
+        $files += $file
+    }
+
+    foreach($file in $files){
+        Add-VaultJob -Name "powerSync.ACC.Publish.RVT" -Description "Translate file '$($file._Name)' to RVT and publish to ACC" -Parameters @{
+            "FileVersionId" = $file.Id
+            "EntityId"= $file.Id
+            "EntityClassId"= $file._EntityTypeID
+            "AccountId" = $user.eidm_guid
+        }
+    }
+
+    if ($excluded.Count -gt 0) {
+        [System.Windows.MessageBox]::Show(
+            "$($files.Count) jobs(s) have been created.$([Environment]::NewLine)The following file(s) are not supported: $($excluded -join [Environment]::NewLine)", 
+            "powerSync: Job Warning", 
+            "OK", 
+            "Warning")
+    }    
+}
+
 Add-VaultMenuItem -Location FileContextMenu -Name "powerSync: Publish Native Files to ACC" -Action {
     param($entities)
     if (-not (ApsTokenIsValid)) {
+        return
+    }
+
+    $missingRoles = GetMissingRoles @("Job Queue Add")
+    if ($missingRoles) {
+        [System.Windows.MessageBox]::Show(
+            "The current user does not have the required permissions: $missingRoles!", 
+            "powerSync: Permission error", 
+            "OK", 
+            "Error")
         return
     }
 
@@ -394,6 +548,16 @@ Add-VaultMenuItem -Location FileContextMenu -Name "powerSync: Publish Native Fil
 Add-VaultMenuItem -Location FileContextMenu -Name "powerSync: Publish Models for Clash Detection (NWC) to ACC" -Action {
     param($entities)
     if (-not (ApsTokenIsValid)) {
+        return
+    }
+
+    $missingRoles = GetMissingRoles @("Job Queue Add")
+    if ($missingRoles) {
+        [System.Windows.MessageBox]::Show(
+            "The current user does not have the required permissions: $missingRoles!", 
+            "powerSync: Permission error", 
+            "OK", 
+            "Error")
         return
     }
 

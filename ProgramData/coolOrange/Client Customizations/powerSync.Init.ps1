@@ -24,6 +24,16 @@ function ApsTokenIsValid() {
         return $true
     }
 
+    $missingRoles = GetMissingRoles @("Vault Get Options", "Vault Set Options")
+    if ($missingRoles) {
+        [System.Windows.MessageBox]::Show(
+            "The current user does not have the required permissions: $missingRoles!", 
+            "powerSync: Permission error", 
+            "OK", 
+            "Error")
+        return $false
+    }
+
     # Get the APS authentication settings from Vault
     $settings = GetVaultApsAuthenticationSettings
     if ($settings -is [powerAPS.Error]) {

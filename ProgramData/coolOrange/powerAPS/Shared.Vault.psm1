@@ -6,6 +6,23 @@
 # OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.   #
 #==============================================================================#
 
+function GetMissingRoles([array]$roles) {
+    $permissions = $global:vault.AdminService.GetPermissionsByUserId($global:vaultConnection.UserID)
+    $names = $permissions | ForEach-Object { $_.Descr }
+    $missing = @()
+    foreach($role in $roles) {
+        if ($names -notcontains $role) {
+            $missing += "'$role'"
+        }
+    }
+
+    if ($missing.Count -gt 0) {
+        return $missing -join ", "
+    } else {
+        return $null
+    }
+}
+
 function GetVaultApsAuthenticationSettings($force = $false) {
     $json = $global:vault.KnowledgeVaultService.GetVaultOption("POWERAPS_AUTH_SETTINGS") 
     if ($json) {
