@@ -23,7 +23,7 @@ powerSync requires coolOrange powerJobs to be installed on the Autodesk Vault Jo
 
 ## Installation
 - Download and install powerJobs Client and powerJobs Processor.
-- Clone or download the repository and copy all folders and files from 'Program Files/coolOrange/Modules/powerAPS' to `%programfiles%\coolOrange\Modules\powerAPS` and from 'ProgramData/coolOrange' to `%programdata%\coolOrange`. 
+- Clone or download the repository and copy all folders, subfolder, and files from 'Program Files/coolOrange/Modules/powerAPS' to `%programfiles%\coolOrange\Modules\powerAPS` and from 'ProgramData/coolOrange' to `%programdata%\coolOrange`. 
 - Restart Vault to apply the changes.
 
 ## Webinar Recording
@@ -176,5 +176,3 @@ Once authenticated with `Open-ApsConnection` this global object is available unt
 | Username      | String    | The username of the authentication                                                                                                                                                            |
 | RequestHeader | HashTable | A HashTable that can be used for the Invoke-RestMethod header parameter. "Authorization"="<BEARER TOKEN" for 3-legged, and "Authorization"="<BEARER TOKEN" + "x-user-id" = AccountId for 2-legged |
 
-## Known Limitations
-Coming soon...
