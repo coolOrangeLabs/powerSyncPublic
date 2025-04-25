@@ -19,12 +19,14 @@ THE USAGE OF THIS SAMPLE IS AT YOUR OWN RISK AND **THERE IS NO SUPPORT** RELATED
 powerSync is an extension for powerJobs to integrate with Autodesk Construction Cloud (ACC) and Fusion Team. It makes use of the Autodesk Platform Services (APS) APIs.
 
 ## Prerequisites
-powerSync requires coolOrange powerJobs to be installed on the Autodesk Vault Job Processor and on the Autodesk Vault Clients.
+powerSync requires coolOrange powerJobs to be installed on the Autodesk Vault Job Processor and on the Autodesk Vault Clients. The files in this repository are for both, powerJobs Client and powerJobs Processor and it is assumed that this sample gets installed on a sandbox environment where both, the Autodesk Vault Client and the Vault Job Processor are active.
 
 ## Installation
-- Download and install powerJobs Client and powerJobs Processor.
-- Clone or download the repository and copy all folders, subfolder, and files from 'Program Files/coolOrange/Modules/powerAPS' to `%programfiles%\coolOrange\Modules\powerAPS` and from 'ProgramData/coolOrange' to `%programdata%\coolOrange`. 
-- Restart Vault to apply the changes.
+- Download and install powerJobs Client and powerJobs Processor
+- Clone or download the repository and copy all folders, subfolder, and files from 'Program Files/coolOrange/Modules/powerAPS' to `%programfiles%\coolOrange\Modules\powerAPS` and from 'ProgramData/coolOrange' to `%programdata%\coolOrange`
+- Make sure non of the cloned/downloaded files are blocked by Windows: https://support.coolorange.com/kb/how-to-unblock-files
+- Make sure Microsoft WebView2 is installed: https://go.microsoft.com/fwlink/p/?LinkId=2124703
+- Restart Vault to apply the changes
 
 ## Webinar Recording
 The configuration of powerSync, its base functionality and the benefits were explained in a dedicated webinar. The recording of this webinar can be found here: https://www.coolorange.com/webinar-follow-up-synchronize-autodesk-vault-with-acc
