@@ -16,35 +16,21 @@ THE SAMPLE CODE ON THIS REPOSITORY IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY K
 THE USAGE OF THIS SAMPLE IS AT YOUR OWN RISK AND **THERE IS NO SUPPORT** RELATED TO IT.
 
 ## Description
-powerSync is an extension for powerJobs to integrate with Autodesk Construction Cloud (ACC) and Fusion Team.
+powerSync is an extension for powerJobs to integrate with Autodesk Construction Cloud (ACC) and Fusion Team. It makes use of the Autodesk Platform Services (APS) APIs.
 
 ## Prerequisites
 powerSync requires coolOrange powerJobs to be installed on the Autodesk Vault Job Processor and on the Autodesk Vault Clients.
 
-## Functionality
-Coming soon...
-
 ## Installation
-Coming soon...
+- Download and install powerJobs Client and powerJobs Processor.
+- Clone or download the repository and copy all folders and files from 'Program Files/coolOrange/Modules/powerAPS' to `%programfiles%\coolOrange\Modules\powerAPS` and from 'ProgramData/coolOrange' to `%programdata%\coolOrange`. 
+- Restart Vault to apply the changes.
 
-## Configuration
-Coming soon...
-
-### APS Application
-
-### Custom Integrations
-
-### Vault Configuration
-
-## Vault Client Extensions
-Coming soon...
-
-## Vault Jobs
-Coming soon...
+## Webinar Recording
+The configuration of powerSync, its base functionality and the benefits were explained in a dedicated webinar. The recording of this webinar can be found here: https://www.coolorange.com/webinar-follow-up-synchronize-autodesk-vault-with-acc
 
 ## Cmdlets
-
-powerSync contains PowerShell functions (cmdlets) for Autodesk Platform Services (APS) OAuth authentication. The cmdlets are bundled in a PowerShell module called powerAPS and support 2-legged and 3-legged OAuth authentication incl. PKCE. including UI for 3-legged user authentication in PowerShell and Autodesk Vault.
+powerSync contains PowerShell functions (cmdlets) for Autodesk Platform Services (APS) OAuth authentication. The cmdlets are bundled in a PowerShell module called `powerAPS` and support 2-legged and 3-legged OAuth authentication, including UI for 3-legged user authentication in PowerShell and Autodesk Vault.
 
 OAuth tokens are refreshed automatically during the objects lifespan.
 
