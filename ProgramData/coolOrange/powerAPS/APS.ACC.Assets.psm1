@@ -18,7 +18,7 @@ function Get-ApsAccAssetCategories ($project) {
     Write-Host "Reading ACC Asset Categories..."
  
     $parameters = @{
-        "Uri"     = "https://developer.api.autodesk.com/construction/assets/v1/projects/$($project.id.TrimStart("b."))/categories"
+        "Uri"     = "https://developer.api.autodesk.com/construction/assets/v1/projects/$(($project.id -replace '^b\.', ''))/categories"
         "Method"  = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -37,7 +37,7 @@ function Get-ApsAccAssetStatusSets($project) {
     Write-Host "Reading ACC Asset Staus Sets..."
 
     $parameters = @{
-        "Uri"     = "https://developer.api.autodesk.com/construction/assets/v1/projects/$($project.id.TrimStart("b."))/status-step-sets"
+        "Uri"     = "https://developer.api.autodesk.com/construction/assets/v1/projects/$(($project.id -replace '^b\.', ''))/status-step-sets"
         "Method"  = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -57,7 +57,7 @@ function Get-ApsAccAssetsByIds($project, [array]$ids) {
 
     $body = ConvertTo-Json @{"ids" = @($ids)} -Compress
     $parameters = @{
-        "Uri"     = "https://developer.api.autodesk.com/construction/assets/v2/projects/$($project.id.TrimStart("b."))/assets:batch-get"
+        "Uri"     = "https://developer.api.autodesk.com/construction/assets/v2/projects/$(($project.id -replace '^b\.', ''))/assets:batch-get"
         "Method"  = "Post"
         "Headers" = $ApsConnection.RequestHeaders
         "ContentType" = "application/json"
@@ -78,7 +78,7 @@ function Get-ApsAccAssets($project) {
     Write-Host "Reading ACC Assets..."
  
     $parameters = @{
-        "Uri"     = "https://developer.api.autodesk.com/construction/assets/v2/projects/$($project.id.TrimStart("b."))/assets"
+        "Uri"     = "https://developer.api.autodesk.com/construction/assets/v2/projects/$(($project.id -replace '^b\.', ''))/assets"
         "Method"  = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -97,7 +97,7 @@ function Get-ApsAccAssetsByCategory($project, $category) {
     Write-Host "Reading ACC Assets..."
 
     $parameters = @{
-        "Uri"     = "https://developer.api.autodesk.com/construction/assets/v2/projects/$($project.id.TrimStart("b."))/assets?filter[categoryId]=$($category.id)"
+        "Uri"     = "https://developer.api.autodesk.com/construction/assets/v2/projects/$(($project.id -replace '^b\.', ''))/assets?filter[categoryId]=$($category.id)"
         "Method"  = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -116,7 +116,7 @@ function Get-ApsAccAssetsByCategoryAndStatusLabel($project, $category, $statusLa
     Write-Host "Reading ACC Assets..."
 
     $parameters = @{
-        "Uri"     = "https://developer.api.autodesk.com/construction/assets/v2/projects/$($project.id.TrimStart("b."))/assets?filter[categoryId]=$($category.id)&filter[statusLabel]=$($statusLabel)"
+        "Uri"     = "https://developer.api.autodesk.com/construction/assets/v2/projects/$(($project.id -replace '^b\.', ''))/assets?filter[categoryId]=$($category.id)&filter[statusLabel]=$($statusLabel)"
         "Method"  = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -141,7 +141,7 @@ function Update-ApsAccAssetStatus($project, $asset, $status) {
         }
     } -Depth 100 -Compress
     $parameters = @{
-        "Uri"         = "https://developer.api.autodesk.com/construction/assets/v2/projects/$($project.id.TrimStart("b."))/assets:batch-patch"
+        "Uri"         = "https://developer.api.autodesk.com/construction/assets/v2/projects/$(($project.id -replace '^b\.', ''))/assets:batch-patch"
         "Method"      = "Patch"
         "Headers"     = $ApsConnection.RequestHeaders        
         "ContentType" = "application/json"

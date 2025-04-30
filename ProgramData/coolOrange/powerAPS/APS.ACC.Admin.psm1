@@ -14,7 +14,7 @@ function Get-ApsAccProjectUsers($project) {
     Write-Host "Reading Project Users..."
     
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/projects/$($project.id.TrimStart("b."))/users"
+        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/projects/$(($project.id -replace '^b\.', ''))/users"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }    
@@ -28,7 +28,7 @@ function Get-ApsAccProjectUser($project, $userId) {
     Write-Host "Reading Project User..."
 
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/projects/$($project.id.TrimStart("b."))/users/$($userId)"
+        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/projects/$(($project.id -replace '^b\.', ''))/users/$($userId)"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }    
@@ -42,7 +42,7 @@ function Find-ApsAccProjectUser($project, $email) {
     Write-Host "Finding Project User..."
 
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/projects/$($project.id.TrimStart("b."))/users?filter[email]=$email"
+        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/projects/$(($project.id -replace '^b\.', ''))/users?filter[email]=$email"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -94,7 +94,7 @@ function Add-ApsAccProjectUser($project, $user) {
     } -Depth 100 -Compress
 
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/projects/$($project.id.TrimStart("b."))/users"
+        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/projects/$(($project.id -replace '^b\.', ''))/users"
         "Method" = "Post"
         "ContentType" = "application/json"
         "Headers" = $ApsConnection.RequestHeaders
@@ -111,7 +111,7 @@ function Get-ApsAccProject($projectId) {
     Write-Host "Reading Project..."
 
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/projects/$($projectId.TrimStart("b."))"
+        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/projects/$(($projectId -replace '^b\.', ''))"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -125,7 +125,7 @@ function Get-ApsAccProjectTemplates($hub) {
     Write-Host "Reading Project Templates..."
 
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/accounts/$($hub.id.TrimStart("b."))/projects?filter[classification]=template&filter[status]=active"
+        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/accounts/$(($hub.id -replace '^b\.', ''))/projects?filter[classification]=template&filter[status]=active"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -153,7 +153,7 @@ function Add-ApsAccProject($hub, $name, $number, $type, $templateId) {
         }
     } -Depth 100 -Compress
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/accounts/$($hub.id.TrimStart("b."))/projects"
+        "Uri" = "https://developer.api.autodesk.com/construction/admin/v1/accounts/$(($hub.id -replace '^b\.', ''))/projects"
         "Method" = "Post"
         "ContentType" = "application/json"
         "Headers" = $ApsConnection.RequestHeaders
@@ -174,7 +174,7 @@ function Get-ApsAccBusinessUnits($hub) {
     Write-Host "Reading Business Units..."
 
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/hq/v1/accounts/$($hub.id.TrimStart("b."))/business_units_structure"
+        "Uri" = "https://developer.api.autodesk.com/hq/v1/accounts/$(($hub.id -replace '^b\.', ''))/business_units_structure"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }

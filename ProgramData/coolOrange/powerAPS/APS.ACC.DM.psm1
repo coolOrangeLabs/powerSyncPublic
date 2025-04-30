@@ -14,7 +14,7 @@ function Get-ApsAccCustomAttributeDefinitions($project, $folder) {
     Write-Host "Reading Custom Attribute Definitions..."
     
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/bim360/docs/v1/projects/$($project.id.TrimStart("b."))/folders/$([System.Web.HttpUtility]::UrlEncode($folder.id))/custom-attribute-definitions"
+        "Uri" = "https://developer.api.autodesk.com/bim360/docs/v1/projects/$(($project.id -replace '^b\.', ''))/folders/$([System.Web.HttpUtility]::UrlEncode($folder.id))/custom-attribute-definitions"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -30,7 +30,7 @@ function Get-ApsAccCustomAttributes($project, $version) {
     $body = ConvertTo-Json @{"urns" = @($version.id)} -Compress
 
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/bim360/docs/v1/projects/$($project.id.TrimStart("b."))/versions:batch-get"
+        "Uri" = "https://developer.api.autodesk.com/bim360/docs/v1/projects/$(($project.id -replace '^b\.', ''))/versions:batch-get"
         "Method" = "Post"
         "Headers" = $ApsConnection.RequestHeaders
         "ContentType" = "application/json"
@@ -55,7 +55,7 @@ function Update-ApsAccCustomAttributes($project, $version, [HashTable]$propertie
     }
     $body = ConvertTo-Json @($values) -Compress
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/bim360/docs/v1/projects/$($project.id.TrimStart("b."))/versions/$([System.Web.HttpUtility]::UrlEncode($version.id))/custom-attributes:batch-update"
+        "Uri" = "https://developer.api.autodesk.com/bim360/docs/v1/projects/$(($project.id -replace '^b\.', ''))/versions/$([System.Web.HttpUtility]::UrlEncode($version.id))/custom-attributes:batch-update"
         "Method" = "Post"
         "Headers" = $ApsConnection.RequestHeaders
         "ContentType" = "application/json"
@@ -86,7 +86,7 @@ function Add-ApsAccFolderPermissions($project, $folder, $subjectUser) {
     }) -Depth 100 -Compress
 
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/bim360/docs/v1/projects/$($project.id.TrimStart("b."))/folders/$($folder.id)/permissions:batch-create"
+        "Uri" = "https://developer.api.autodesk.com/bim360/docs/v1/projects/$(($project.id -replace '^b\.', ''))/folders/$($folder.id)/permissions:batch-create"
         "Method" = "Post"
         "Headers" = $ApsConnection.RequestHeaders
         "ContentType" = "application/json"

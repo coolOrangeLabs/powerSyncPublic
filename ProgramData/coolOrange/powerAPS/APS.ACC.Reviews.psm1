@@ -15,7 +15,7 @@
 
 function Get-ApsAccReviewWorkflows($project) {
     $parameters = @{ 
-        "Uri" = "https://developer.api.autodesk.com/construction/reviews/v1/projects/$($project.id.TrimStart("b."))/workflows"
+        "Uri" = "https://developer.api.autodesk.com/construction/reviews/v1/projects/$(($project.id -replace '^b\.', ''))/workflows"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -25,7 +25,7 @@ function Get-ApsAccReviewWorkflows($project) {
 
 function Get-ApsAccReviews($project) {
     $parameters = @{ 
-        "Uri" = "https://developer.api.autodesk.com/construction/reviews/v1/projects/$($project.id.TrimStart("b."))/reviews"
+        "Uri" = "https://developer.api.autodesk.com/construction/reviews/v1/projects/$(($project.id -replace '^b\.', ''))/reviews"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -35,7 +35,7 @@ function Get-ApsAccReviews($project) {
 
 function Get-ApsAccReviewVersions($project, $review) {
     $parameters = @{ 
-        "Uri" = "https://developer.api.autodesk.com/construction/reviews/v1/projects/$($project.id.TrimStart("b."))/reviews/$($review.id)/versions"
+        "Uri" = "https://developer.api.autodesk.com/construction/reviews/v1/projects/$(($project.id -replace '^b\.', ''))/reviews/$($review.id)/versions"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -57,15 +57,15 @@ function Add-ApsAccReview($project, $workflow, $reviewName, $reviewNotes, $versi
         "workflowId" = "$($workflow.id)"
         "notes" = "$($reviewNotes)"
         "workflowOptions" = @{
-            "copyFilesOptions" = @{
-                "folderUrn" = "$($workflow.copyFilesOptions.folderUrn)"
-            }
+            #"copyFilesOptions" = @{
+            #    "folderUrn" = "$($workflow.copyFilesOptions.folderUrn)"
+            #}
             "steps" = @($workflow.steps)
         }
     } -Depth 100 -Compress
     
     $parameters = @{ 
-        "Uri" = "https://developer.api.autodesk.com/construction/reviews/v1/projects/$($project.id.TrimStart("b."))/reviews"
+        "Uri" = "https://developer.api.autodesk.com/construction/reviews/v1/projects/$(($project.id -replace '^b\.', ''))/reviews"
         "Method" = "Post"
         "Headers" = $ApsConnection.RequestHeaders
         "ContentType" = "application/json"

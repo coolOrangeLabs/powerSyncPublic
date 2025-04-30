@@ -92,7 +92,7 @@ Add-VaultTab -Name "ACC Issues" -EntityType File -Action {
 
     $tab_control.FindName('ButtonGoToProject').IsEnabled = $true
     $tab_control.FindName('ButtonGoToProject').add_Click({
-        Start-Process "https://acc.autodesk.com/docs/issues/projects/$($project.id.TrimStart("b."))/issues"
+        Start-Process "https://acc.autodesk.com/docs/issues/projects/$(($project.id -replace '^b\.', ''))/issues"
     }.GetNewClosure())
 
 	return $tab_control

@@ -258,7 +258,7 @@ Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Go To ACC Docs P
         return
     }
 
-    Start-Process "https://acc.autodesk.com/docs/files/projects/$($project.id.TrimStart("b."))"
+    Start-Process "https://acc.autodesk.com/docs/files/projects/$(($project.id -replace '^b\.', ''))"
 }
 
 Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Go To ACC Build Project..." -Action {
@@ -284,7 +284,7 @@ Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Go To ACC Build 
         return
     }
 
-    Start-Process "https://acc.autodesk.com/build/files/projects/$($project.id.TrimStart("b."))"
+    Start-Process "https://acc.autodesk.com/build/files/projects/$(($project.id -replace '^b\.', ''))"
 }
 
 Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Download File from Cloud Drive..." -Action {

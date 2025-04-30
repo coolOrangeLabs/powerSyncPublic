@@ -36,7 +36,7 @@ function Get-ApsAccRelationships($project) {
     Write-Host "Reading Relationships..."
 
     $parameters = @{
-        "Uri"     = "https://developer.api.autodesk.com/bim360/relationship/v2/containers/$($project.id.TrimStart("b."))/relationships:search"
+        "Uri"     = "https://developer.api.autodesk.com/bim360/relationship/v2/containers/$(($project.id -replace '^b\.', ''))/relationships:search"
         "Method"  = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }    
@@ -70,7 +70,7 @@ function Add-ApsAccRelationship($project, $version1, $version2) {
         )
     }) -Depth 100 -Compress
     $parameters = @{
-        "Uri"         = "https://developer.api.autodesk.com/bim360/relationship/v2/containers/$($project.id.TrimStart("b."))/relationships"
+        "Uri"         = "https://developer.api.autodesk.com/bim360/relationship/v2/containers/$(($project.id -replace '^b\.', ''))/relationships"
         "Method"      = "Put"
         "Headers"     = $ApsConnection.RequestHeaders        
         "ContentType" = "application/json"
@@ -91,7 +91,7 @@ function Remove-ApsAccRelationships($project, [array]$relationshipIds) {
 
     $body = ConvertTo-Json @($relationshipIds) -Depth 100 -Compress
     $parameters = @{
-        "Uri"         = "https://developer.api.autodesk.com/bim360/relationship/v2/containers/$($project.id.TrimStart("b."))/relationships:delete"
+        "Uri"         = "https://developer.api.autodesk.com/bim360/relationship/v2/containers/$(($project.id -replace '^b\.', ''))/relationships:delete"
         "Method"      = "Post"
         "Headers"     = $ApsConnection.RequestHeaders
         "ContentType" = "application/json"

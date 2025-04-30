@@ -18,7 +18,7 @@ function Get-ApsAccIssues($project) {
     Write-Host "Reading Issues..."
 
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/construction/issues/v1/projects/$($project.id.TrimStart("b."))/issues"
+        "Uri" = "https://developer.api.autodesk.com/construction/issues/v1/projects/$(($project.id -replace '^b\.', ''))/issues"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -36,7 +36,7 @@ function Get-ApsAccIssueComments($project, $issue) {
     Write-Host "Reading Issue Comments..."
 
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/construction/issues/v1/projects/$($project.id.TrimStart("b."))/issues/$($issue.id)/comments"
+        "Uri" = "https://developer.api.autodesk.com/construction/issues/v1/projects/$(($project.id -replace '^b\.', ''))/issues/$($issue.id)/comments"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -55,7 +55,7 @@ function Add-ApsAccIssueComments($project, $issue, $commentText) {
 
     $body = ConvertTo-Json @{ "body" = "$($commentText)" } -Depth 100 -Compress
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/construction/issues/v1/projects/$($project.id.TrimStart("b."))/issues/$($issue.id)/comments"
+        "Uri" = "https://developer.api.autodesk.com/construction/issues/v1/projects/$(($project.id -replace '^b\.', ''))/issues/$($issue.id)/comments"
         "Method" = "Post"
         "Headers" = $ApsConnection.RequestHeaders
         "ContentType" = "application/json"
@@ -75,7 +75,7 @@ function Get-ApsAccIssueTypes($project) {
     Write-Host "Reading Issue Types..."
 
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/construction/issues/v1/projects/$($project.id.TrimStart("b."))/issue-types?include=subtypes"
+        "Uri" = "https://developer.api.autodesk.com/construction/issues/v1/projects/$(($project.id -replace '^b\.', ''))/issue-types?include=subtypes"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
@@ -93,9 +93,30 @@ function Get-ApsAccRootCauses($project) {
     Write-Host "Reading Root Causes..."
     
     $parameters = @{
-        "Uri" = "https://developer.api.autodesk.com/construction/issues/v1/projects/$($project.id.TrimStart("b."))/issue-root-cause-categories?include=rootcauses"
+        "Uri" = "https://developer.api.autodesk.com/construction/issues/v1/projects/$(($project.id -replace '^b\.', ''))/issue-root-cause-categories?include=rootcauses"
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
+    }
+    $response = Invoke-RestMethod @parameters
+    return $response.results
+}
+
+# Function to Update an issue state. Returns the updated issue object.
+# API documentation: https://aps.autodesk.com/en/docs/acc/v1/reference/http/issues-issues-issueId-PATCH/
+function Update-ApsAccIssueState($project, $issue, $status) {
+    if ($ApsConnection.AuthType -ne [powerAps.ApsAuthType]::ThreeLegged) {
+        throw "Three-legged authentication is required"
+    }
+
+    Write-Host "Updating Issue..."
+
+    $body = ConvertTo-Json @{"status" = $status} -Compress
+    $parameters = @{
+        "Uri" = "https://developer.api.autodesk.com/construction/issues/v1/projects/$(($project.id -replace '^b\.', ''))/issues/$($issue.id)"
+        "Method" = "Patch"
+        "Headers" = $ApsConnection.RequestHeaders
+        "ContentType" = "application/json"
+        "Body" = $body
     }
     $response = Invoke-RestMethod @parameters
     return $response.results
