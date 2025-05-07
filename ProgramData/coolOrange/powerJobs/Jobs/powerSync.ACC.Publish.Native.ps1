@@ -67,7 +67,7 @@ $projectProperties = GetVaultAccProjectProperties $file._FolderPath
 if ($projectProperties -is [powerAPS.Error]) {
     throw $projectProperties.Message
 }
-$hub = Get-ApsHub $projectProperties["Hub"]
+$hub = Get-ApsAccHub $projectProperties["Hub"]
 if (-not $hub) {
     throw "ACC Hub '$($projectProperties["Hub"])' not found!"
 }

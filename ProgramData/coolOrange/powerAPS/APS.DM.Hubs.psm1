@@ -47,6 +47,17 @@ function Get-ApsAccHubs {
     return $response.data
 }
 
+# Function to get a single ACC hub. Returns a hub object with the given name or $null.
+function Get-ApsAccHub($hubName) {
+    $hubs = Get-ApsAccHubs
+    $hub = $hubs | Where-Object { $_.attributes.name -eq $hubName -and $_.attributes.extension.type -eq "hubs:autodesk.bim360:Account" } | Select-Object -First 1
+    if ($hub) {
+        return $hub
+    } else {
+        return $null
+    }
+}
+
 # Function to get all hubs of type 'Fusion Team'. Returns all hub objects of type 'Fusion Team'.
 # API documentation: https://aps.autodesk.com/en/docs/data/v2/reference/http/hubs-GET
 function Get-ApsCoreHubs {

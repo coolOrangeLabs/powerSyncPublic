@@ -24,7 +24,7 @@ function Get-DialogApsAttributeMapping($vaultFolderPath, [Hashtable]$mapping) {
         throw "ACC Project folder properties cannot be found!"
     }
     
-    $hub = Get-ApsHub $projectProperties["Hub"]
+    $hub = Get-ApsAccHub $projectProperties["Hub"]
     $project = Get-ApsProject -hub $hub -projectName $projectProperties["Project"]
 
     $projectFilesFolder = Get-ApsProjectFilesFolder $hub $project

@@ -24,7 +24,7 @@ Add-VaultTab -Name "ACC Issues" -EntityType File -Action {
         return $tab_control
     }
 
-    $hub = Get-ApsHub $projectProperties["Hub"]
+    $hub = Get-ApsAccHub $projectProperties["Hub"]
     if (-not $hub) {
         return $tab_control
     }

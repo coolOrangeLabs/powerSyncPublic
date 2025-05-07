@@ -248,7 +248,7 @@ Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Go To ACC Docs P
         return
     }
 
-    $hub = Get-ApsHub $projectProperties["Hub"]
+    $hub = Get-ApsAccHub $projectProperties["Hub"]
     if (-not $hub) {
         return
     }
@@ -274,7 +274,7 @@ Add-VaultMenuItem -Location FolderContextMenu -Name "powerSync: Go To ACC Build 
         return
     }
 
-    $hub = Get-ApsHub $projectProperties["Hub"]
+    $hub = Get-ApsAccHub $projectProperties["Hub"]
     if (-not $hub) {
         return
     }

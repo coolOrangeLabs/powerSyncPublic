@@ -189,7 +189,7 @@ if (-not $projectFolder) {
     throw "ACC Project folder not specified in Vault!"
 }
 $folderProperties = GetVaultAccProjectProperties $file._FolderPath
-$hub = Get-ApsHub $folderProperties["Hub"]
+$hub = Get-ApsAccHub $folderProperties["Hub"]
 if (-not $hub) {
     throw "ACC Hub '$($folderProperties["Hub"])' not found!"
 }
