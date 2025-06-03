@@ -100,7 +100,7 @@ function Add-ApsFirstVersion($project, $folder, $fullFilePath, $uploadObject, [H
         "Method"      = "Post"
         "ContentType" = "application/vnd.api+json"
         "Headers"     = $ApsConnection.RequestHeaders
-        "Body"        = $body
+        "Body"        = (New-Object System.Text.UTF8Encoding($false)).GetBytes($body)
     }
     $response = Invoke-RestMethod @parameters
     $item = $response.data
@@ -158,7 +158,7 @@ function Add-ApsNextVersion($project, $existingItem, $fullFilePath, $uploadObjec
         "Method"      = "Post"
         "ContentType" = "application/vnd.api+json"
         "Headers"     = $ApsConnection.RequestHeaders
-        "Body"        = $body
+        "Body"        = (New-Object System.Text.UTF8Encoding($false)).GetBytes($body)
     }
     $response = Invoke-RestMethod @parameters
     return $response.data
@@ -257,7 +257,7 @@ function Add-ApsVersionReferences($project, $version, $childFiles, $filesAndVers
                 "Method"      = "Post"
                 "ContentType" = "application/vnd.api+json"
                 "Headers"     = $ApsConnection.RequestHeaders
-                "Body"        = $body
+                "Body"        = (New-Object System.Text.UTF8Encoding($false)).GetBytes($body)
             }
             Invoke-RestMethod @parameters
         }

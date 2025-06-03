@@ -54,15 +54,17 @@ function Add-ApsBucketFile($project, $folder, $fullFilePath) {
             }
         }
     } -Depth 100 -Compress
+  
     $parameters = @{
         "Uri" = "https://developer.api.autodesk.com/data/v1/projects/$($project.id)/storage"
         "Method" = "Post"
         "Headers" = $ApsConnection.RequestHeaders
         "ContentType" = "application/vnd.api+json"
-        "Body" = $body
+        "Body" = (New-Object System.Text.UTF8Encoding($false)).GetBytes($body)
     }
     $responseStorage = Invoke-RestMethod @parameters
     $storage = $responseStorage.data
+
     $parts = $storage.id.Split(":")
     for ($i = 1; $i -le $parts.Count; $i++) { 
         if ($parts[$i] -eq "os.object") {

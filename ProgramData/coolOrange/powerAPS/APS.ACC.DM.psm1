@@ -33,7 +33,7 @@ function Get-ApsAccCustomAttributes($project, $version) {
         "Uri" = "https://developer.api.autodesk.com/bim360/docs/v1/projects/$(($project.id -replace '^b\.', ''))/versions:batch-get"
         "Method" = "Post"
         "Headers" = $ApsConnection.RequestHeaders
-        "ContentType" = "application/json"
+        "ContentType" = "application/json; charset=utf-8"
         "Body" = $body
     }
     $response = Invoke-RestMethod @parameters 
@@ -58,7 +58,7 @@ function Update-ApsAccCustomAttributes($project, $version, [HashTable]$propertie
         "Uri" = "https://developer.api.autodesk.com/bim360/docs/v1/projects/$(($project.id -replace '^b\.', ''))/versions/$([System.Web.HttpUtility]::UrlEncode($version.id))/custom-attributes:batch-update"
         "Method" = "Post"
         "Headers" = $ApsConnection.RequestHeaders
-        "ContentType" = "application/json"
+        "ContentType" = "application/json; charset=utf-8"
         "Body" = $body
     }
     $response = Invoke-RestMethod @parameters

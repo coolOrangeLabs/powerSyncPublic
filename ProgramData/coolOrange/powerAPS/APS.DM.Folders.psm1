@@ -18,8 +18,15 @@ function Get-ApsFolderContents($project, $folder) {
         "Method" = "Get"
         "Headers" = $ApsConnection.RequestHeaders
     }
-    $response = Invoke-RestMethod @parameters
-    return $response.data
+    #$response = Invoke-RestMethod @parameters
+    #return $response.data
+
+    $response = Invoke-WebRequest @parameters
+    $ms = New-Object System.IO.MemoryStream
+    $response.RawContentStream.CopyTo($ms)
+    $json = [System.Text.Encoding]::UTF8.GetString($ms.ToArray())
+    $data = $json | ConvertFrom-Json
+    return $data.data
 }
 
 # Function to create a new folder. Returns a folder object.
@@ -50,12 +57,13 @@ function Add-ApsFolder($project, $parentFolder, $folderName) {
             }
         }
     } -Depth 100 -Compress
+
     $parameters = @{
         "Uri" = "https://developer.api.autodesk.com/data/v1/projects/$($project.id)/folders"
         "Method" = "Post"
         "ContentType" = "application/vnd.api+json"
         "Headers" = $ApsConnection.RequestHeaders
-        "Body" = $body
+        "Body" = (New-Object System.Text.UTF8Encoding($false)).GetBytes($body)
     }    
     $response = Invoke-RestMethod @parameters
     return $response.data
